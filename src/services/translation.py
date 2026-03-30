@@ -34,17 +34,13 @@ async def translate(
             )
             resp.raise_for_status()
     except httpx.TimeoutException as e:
-        raise TranslationTimeoutError(
-            "Translation API timed out"
-        ) from e
+        raise TranslationTimeoutError("Translation API timed out") from e
     except httpx.HTTPStatusError as e:
         raise ExternalAPIError(
             f"Translation API returned {e.response.status_code}"
         ) from e
     except httpx.HTTPError as e:
-        raise ExternalAPIError(
-            f"Translation API request failed: {e}"
-        ) from e
+        raise ExternalAPIError(f"Translation API request failed: {e}") from e
 
     data: dict[str, object] = resp.json()
     response_data = data["responseData"]

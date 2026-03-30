@@ -24,9 +24,7 @@ def _make_mock(
 
 @pytest.fixture()
 def mock_translate_success() -> Iterator[AsyncMock]:
-    with patch(
-        "src.routers.translate.translate", new_callable=AsyncMock
-    ) as m:
+    with patch("src.routers.translate.translate", new_callable=AsyncMock) as m:
         m.return_value = TranslationResult(
             translated_text="こんにちは",
             source_lang="auto",
@@ -39,9 +37,7 @@ def mock_translate_success() -> Iterator[AsyncMock]:
 def mock_translate_timeout() -> Iterator[AsyncMock]:
     from src.exceptions import TranslationTimeoutError
 
-    with patch(
-        "src.routers.translate.translate", new_callable=AsyncMock
-    ) as m:
+    with patch("src.routers.translate.translate", new_callable=AsyncMock) as m:
         m.side_effect = TranslationTimeoutError("Translation API timed out")
         yield m
 
@@ -50,8 +46,6 @@ def mock_translate_timeout() -> Iterator[AsyncMock]:
 def mock_translate_error() -> Iterator[AsyncMock]:
     from src.exceptions import ExternalAPIError
 
-    with patch(
-        "src.routers.translate.translate", new_callable=AsyncMock
-    ) as m:
+    with patch("src.routers.translate.translate", new_callable=AsyncMock) as m:
         m.side_effect = ExternalAPIError("Translation API returned 500")
         yield m

@@ -44,9 +44,7 @@ def test_translate_missing_text() -> None:
 
 
 def test_translate_empty_text() -> None:
-    resp = client.post(
-        "/translate", json={"text": "", "target_lang": "ja"}
-    )
+    resp = client.post("/translate", json={"text": "", "target_lang": "ja"})
     assert resp.status_code == 422
 
 
