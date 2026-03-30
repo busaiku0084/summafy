@@ -7,10 +7,21 @@ class TranslateRequest(BaseModel):
         default=None,
         description="Source language code (e.g. 'en'). Auto-detect if omitted.",
     )
-    target_lang: str = Field(..., description="Target language code (e.g. 'ja')")
+    target_lang: str = Field(
+        ..., description="Target language code (e.g. 'ja')"
+    )
 
 
 class TranslateResponse(BaseModel):
     translated_text: str
     source_lang: str
     target_lang: str
+
+
+class LanguageInfo(BaseModel):
+    code: str
+    name: str
+
+
+class LanguagesResponse(BaseModel):
+    languages: list[LanguageInfo]
