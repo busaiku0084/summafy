@@ -14,3 +14,12 @@ class TranslateResponse(BaseModel):
     translated_text: str
     source_lang: str
     target_lang: str
+
+
+class LanguageInfo(BaseModel):
+    code: str
+    name: str
+
+
+class LanguagesResponse(BaseModel):
+    languages: list[LanguageInfo]
